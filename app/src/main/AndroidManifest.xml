@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="myoracle.com.quotes">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.SET_WALLPAPER"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity">
+
+
+        </activity>
+        <activity android:name=".SplashActivity"></activity>
+        <activity
+            android:name=".QuotesActivity" android:parentActivityName=".QuotesCardActivity">
+        </activity>
+        <activity
+            android:name=".StoryDetailsActivity" >
+        </activity>
+        <activity
+            android:name=".QuotesCardActivity" android:parentActivityName=".MainActivity" >
+        </activity>
+        <activity
+            android:name=".TabActivity" android:parentActivityName=".TabActivity" >
+        </activity>
+        <activity android:name=".WallpaperDeatilsActivity"/>
+        <activity android:name=".MindTriksQuestionsActivity"/>
+
+    </application>
+
+
+</manifest>

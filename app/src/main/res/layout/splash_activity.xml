@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/splash_quotes"
+        android:layout_width="match_parent"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:paddingLeft="10dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="5dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+        android:text="Success consists of going from failure to failure without loss of enthusiasm"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/splash_line"
+        android:id="@+id/txt_author"
+        android:textSize="14dp"
+        android:paddingRight="10dp"
+        android:text="midhun"
+        android:gravity="right"/>
+
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textSize="12dp"
+        android:textColor="#454545"
+        android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:text="www.bluewineapps.com" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_below="@+id/splash_quotes"
+        android:id="@+id/splash_line"
+        android:layout_height="1dp"
+        android:background="#00C853"/>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adViewSplash"
+        android:gravity="bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id">
+    </com.google.android.gms.ads.AdView>
+
+
+</RelativeLayout>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:background="@color/mindTrickBackground"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/mind_question_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="#47"
+        android:layout_above="@+id/mindtrick_text"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:fontFamily="casual"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        android:paddingBottom="10dp"
+        />
+
+    <TextView
+        android:id="@+id/mindtrick_text"
+        android:layout_width="match_parent"
+        android:textSize="22dp"
+        android:textColor="@color/white"
+        android:paddingLeft="10dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="5dp"
+        android:fontFamily="casual"
+        android:textStyle="bold"
+
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+        android:text="Success consists of going from failure to failure without loss of enthusiasm"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mindtrick_text"
+        android:id="@+id/txt_author"
+        android:textStyle="bold"
+        android:textColor="@color/mindTrickSecondoryColor"
+        android:textSize="20dp"
+        android:paddingRight="20dp"
+        android:text="midhun"
+        android:gravity="center"/>
+
+
+
+    <TextView
+        android:id="@+id/show_mindtrick_answer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:gravity="right"
+        android:layout_alignParentBottom="true"
+        android:fontFamily="casual"
+        android:textStyle="bold"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="Answer" />
+
+
+
+
+</RelativeLayout>

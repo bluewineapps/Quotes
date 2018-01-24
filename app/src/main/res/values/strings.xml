@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Status &amp; Wallpapers</string>
+    <string name="banner_ad_unit_id">ca-app-pub-8629047556008369/7518362536</string>
+    <string name="banner_ad_unit_id_2">ca-app-pub-8629047556008369/1901956801</string>
+    <string name="admob_interstitial_id">ca-app-pub-8629047556008369/2682354305</string>
+
+    <string name="privacy_policy"><![CDATA[
+<p>This is a html-formatted string with <b>bold</b> and <i>italic</i> text</p>
+<p>This is another paragraph of the same string.</p>
+]]></string>
+    <string name="permission_necessary">permission nessesory</string>
+    <string name="storage_permission_is_encessary_to_wrote_event">permission for event</string>
+
+
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title"></string>
+    <string name="slide_1_desc"> Wellcome To Absalute Motivation </string>
+
+    <string name="slide_2_title">WallPapers</string>
+    <string name="slide_2_desc">Awesome Selection Of Artistic, Elegant Inspirational Wallpapers.</string>
+
+    <string name="slide_3_title">Great Quotes</string>
+    <string name="slide_3_desc">Arise,awake and donot stop until the goal is reached...!</string>
+
+    <string name="slide_4_title">World Travel</string>
+    <string name="slide_4_desc">Book tickets of any transportation and travel the world!</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+
+    <string name="downloadCompleted">downloads completed</string>
+    <string name="wallpaperupdated">Wallpaper updated</string>
+    <string name="no_internet">No internet connection!</string>
+
+    <string name="share"> "Please share this app with 3 contacts help us to grow :)"</string>
+</resources>
+

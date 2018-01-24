@@ -1,0 +1,31 @@
+<resources>
+
+    <array name="shortQuotes">
+        <item> The starting point of all achievement is desire.\nNapoleon Hill </item>
+        <item> Success consists of going from failure to failure without loss of enthusiasm.\nWinston Churchill </item>
+        <item> Try not to become a man of success, but rather try to become a man of value.\nAlbert Einstein </item>
+        <item> Success is not final, failure is not fatal: it is the courage to continue that counts.\nWinston Churchill </item>
+        <item> Failure will never overtake me if my determination to succeed is strong enough.\nOg Mandino </item>
+        <item> Your talent is God\'s gift to you. What you do with it is your gift back to God.\nLeo Buscaglia </item>
+        <item> Nothing is impossible, the word itself says \'I\'m possible\'!\nAudrey Hepburn </item>
+        <item> Always do your best. What you plant now, you will harvest later.\nOg Mandino </item>
+        <item> I\'ve always tried to go a step past wherever people expected me to end up.\nBeverly Sills </item>
+        <item> It does not matter how slowly you go as long as you do not stop.\nConfucius </item>
+        <item> Things do not happen. Things are made to happen.\nJohn F. Kennedy </item>
+        <item> With the new day comes new strength and new thoughts.\nEleanor Roosevelt </item>
+        <item> You are never too old to set another goal or to dream a new dream.\nC. S. Lewis </item>
+        <item> If opportunity doesn\'t knock, build a door.\n Milton Berle </item>
+        <item> Try to be a rainbow in someone\'s cloud.\nMaya Angelou </item>
+        <item> I don\’t want to earn my living; I want to live.\nOscar Wilde </item>
+        <item>Work hard. Dream big.\nUnknown</item>
+        <item> Life must be lived forwards, but can only be understood backwards.\nKierkegaard </item>
+        <item>The trouble is you think you have time.\nBuddha</item>
+        <item> Life is a shipwreck, but we must not forget to sing in the lifeboats.\nVoltaire </item>
+        <item>Whatever you are, be a good one.\nAbraham Lincoln</item>
+        <item> A man is not old until his regrets take the place of his dreams.\nJohn Barrymore </item>
+        <item>Try and fail, but never fail to try.\nJared Leto</item>
+        <item>Life is wasted on the living.\nDouglas Adams</item>
+
+    </array>
+
+</resources>
