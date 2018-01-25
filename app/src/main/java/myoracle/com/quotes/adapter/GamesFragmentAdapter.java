@@ -18,6 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,6 +93,8 @@ public class GamesFragmentAdapter extends Fragment  {
                 Intent intent;
                 intent = new Intent(getActivity(), MindTriksQuestionsActivity.class);
 
+                intent.putExtra("key","key"+position);
+                intent.putExtra("games",gamesList.get(position).getGameData());
                 startActivity(intent);
             }
 
@@ -107,6 +110,8 @@ public class GamesFragmentAdapter extends Fragment  {
     class GamesListDownlaoderTask extends AsyncTask<String,Integer,JSONArray> {
 
         OkHttpClient client = new OkHttpClient();
+        List<Games> gamesDownLoadList=new ArrayList<Games>();
+
         @Override
         protected void onPreExecute() {
             gamesList.clear();
@@ -133,7 +138,7 @@ public class GamesFragmentAdapter extends Fragment  {
                         games.setImage(gameJsonObject.getString("gameImage"));
                         games.setName(gameJsonObject.getString("gameName"));
                         games.setGameData(gameJsonObject.getString("gameFile"));
-
+                        gamesDownLoadList.add(games);
                     } catch (JSONException e) {
                         Log.v("",e.getMessage());
                     }
@@ -152,9 +157,9 @@ public class GamesFragmentAdapter extends Fragment  {
         protected void onPostExecute(JSONArray jsonArray) {
 
             super.onPostExecute(jsonArray);
-            wallpaperList.addAll(wallpaperMains);
-            recyclerView.setAdapter(wallPaperAdapter);
-            wallPaperAdapter.notifyDataSetChanged();
+            gamesList.addAll(gamesDownLoadList);
+            recyclerView.setAdapter(gamesAdapter);
+            gamesAdapter.notifyDataSetChanged();
 
         }
     }

@@ -3,6 +3,8 @@ package myoracle.com.quotes;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.HashSet;
+
 /**
  * Created by Midhun on 21-12-2017.
  */
@@ -19,7 +21,7 @@ public class PrefManager {
     private static final String IS_FIRST_TIME_LAUNCH ="isFirstTimeLaunch";
 
 
-    private static final String MIND_TRICK_QUESTION_NO ="MIND_TRICK_INDEX";
+
 
     public PrefManager(Context context){
         this.context=context;
@@ -27,13 +29,14 @@ public class PrefManager {
         editor=sharedPreferences.edit();
     }
 
-    public  Integer getMindTrickQuestionNo() {
-        return sharedPreferences.getInt(MIND_TRICK_QUESTION_NO,0);
+    public  Integer getMindTrickQuestionNo(String key) {
+
+        return sharedPreferences.getInt(key,0);
     }
 
-    public  void setMindTrickQuestionNo(Integer mindTrickQuestionNo) {
+    public  void setMindTrickQuestionNo(String key,Integer mindTrickQuestionNo) {
 
-        editor.putInt(MIND_TRICK_QUESTION_NO,mindTrickQuestionNo);
+        editor.putInt(key,mindTrickQuestionNo);
         editor.commit();
     }
 

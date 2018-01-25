@@ -35,15 +35,17 @@ public class MindTricksAdapter extends PagerAdapter {
     private final Context context;
 
     private Boolean flag =true;
-
+    private String key;
     private LayoutInflater layoutInflater;
     private final List<MindTrick> mindTricksMain;
 
     private PrefManager prefManager;
 
     InterstitialAd mInterstitialAd;
-    public MindTricksAdapter(Context applicationContext, List<MindTrick> mindTricks) {
+    public MindTricksAdapter(Context applicationContext, List<MindTrick> mindTricks,String key) {
         super();
+
+        this.key=key ;
         this.context=applicationContext;
         this.mindTricksMain=mindTricks;
         this.prefManager =new PrefManager(applicationContext);
@@ -112,7 +114,7 @@ public class MindTricksAdapter extends PagerAdapter {
         });
 
         container.addView(mindCellView);
-        prefManager.setMindTrickQuestionNo(position);
+        prefManager.setMindTrickQuestionNo(key,position);
         return mindCellView;
     }
     private void showInterstitial() {

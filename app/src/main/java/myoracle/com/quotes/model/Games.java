@@ -1,10 +1,12 @@
 package myoracle.com.quotes.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Midhun on 19-01-2018.
  */
 
-public class Games {
+public class Games implements Serializable{
 
     private String name;
     private String description;

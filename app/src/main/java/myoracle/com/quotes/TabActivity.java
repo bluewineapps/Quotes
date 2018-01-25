@@ -19,7 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -66,10 +66,11 @@ public class TabActivity extends AppCompatActivity {
         setUpTabs();
 
 
+
         mInstance = this;
 
-//        AnalyticsTrackers.initialize(this);
-//        AnalyticsTrackers.getInstance().get(AnalyticsTrackers.Target.APP);
+        AnalyticsTrackers.initialize(this);
+        AnalyticsTrackers.getInstance().get(AnalyticsTrackers.Target.APP);
 
 
         AdView mAdView = (AdView) findViewById(R.id.addViewQuotesList);
@@ -134,6 +135,16 @@ public class TabActivity extends AppCompatActivity {
         }
 
     }
+
+    public static synchronized TabActivity getInstance() {
+        return mInstance;
+    }
+
+    public synchronized Tracker getGoogleAnalyticsTracker() {
+        AnalyticsTrackers analyticsTrackers = AnalyticsTrackers.getInstance();
+        return analyticsTrackers.get(AnalyticsTrackers.Target.APP);
+    }
+
 
     private void showInterstitial() {
         if (mInterstitialAd.isLoaded()) {
@@ -200,12 +211,4 @@ public class TabActivity extends AppCompatActivity {
     }
 
 
-    public static synchronized TabActivity getInstance() {
-        return mInstance;
-    }
-
-//    public synchronized Tracker getGoogleAnalyticsTracker() {
-//        AnalyticsTrackers analyticsTrackers = AnalyticsTrackers.getInstance();
-//        return analyticsTrackers.get(AnalyticsTrackers.Target.APP);
-//    }
 }

@@ -46,6 +46,7 @@ import okhttp3.Response;
 public class MindTriksQuestionsActivity extends AppCompatActivity {
 
     private int index;
+    private String key;
     private Toolbar toolbar;
     private ViewPager viewPager;
     private List<MindTrick> mindTricks = new ArrayList<>();
@@ -68,13 +69,16 @@ public class MindTriksQuestionsActivity extends AppCompatActivity {
 
         this.viewPager = (ViewPager) findViewById(R.id.pager);
 
-        this.mindTricksAdapter = new MindTricksAdapter(getApplicationContext(), mindTricks);
+        Bundle bundle = getIntent().getExtras();
+        this.key=bundle.getString("key");
+        new MindTrickDownloader().execute(bundle.getString("games"));
+
+        this.mindTricksAdapter = new MindTricksAdapter(getApplicationContext(), mindTricks,key);
         this.viewPager.setAdapter(mindTricksAdapter);
         this.viewPager.setCurrentItem(10,true);
 
 
 
-        new MindTrickDownloader().execute("https://bluewineapps.github.io/mind%20tricks.json");
     }
 
 
@@ -118,7 +122,9 @@ public class MindTriksQuestionsActivity extends AppCompatActivity {
     class MindTrickDownloader extends AsyncTask<String,Integer,JSONArray> {
         private ArrayList<MindTrick> mindTrickList = new ArrayList<MindTrick>();
         PrefManager prefManager = new PrefManager(getApplicationContext());
-        int item =prefManager.getMindTrickQuestionNo();
+        int item =prefManager.getMindTrickQuestionNo(key);
+
+
         OkHttpClient okHttpClient = new OkHttpClient();
 
 
