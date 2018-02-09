@@ -7,4 +7,7 @@
     <item
         android:id="@+id/action_rate_us"
         android:title="Rate us on google play" />
+    <item
+        android:id="@+id/action_rate_feedback"
+        android:title="Send A FeedBack" />
 </menu>

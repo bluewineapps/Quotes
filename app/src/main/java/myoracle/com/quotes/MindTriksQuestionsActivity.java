@@ -22,6 +22,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
+import com.google.android.gms.analytics.Tracker;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,7 +53,7 @@ public class MindTriksQuestionsActivity extends AppCompatActivity {
     private List<MindTrick> mindTricks = new ArrayList<>();
     private MindTricksAdapter mindTricksAdapter;
 
-
+    private static MindTriksQuestionsActivity mInstance;
 
 
     @Override
@@ -77,8 +78,20 @@ public class MindTriksQuestionsActivity extends AppCompatActivity {
         this.viewPager.setAdapter(mindTricksAdapter);
         this.viewPager.setCurrentItem(10,true);
 
+        mInstance = this;
 
+        AnalyticsTrackers.initialize(this);
+        AnalyticsTrackers.getInstance().get(AnalyticsTrackers.Target.APP);
 
+    }
+
+    public static synchronized MindTriksQuestionsActivity getInstance() {
+        return mInstance;
+    }
+
+    public synchronized Tracker getGoogleAnalyticsTracker() {
+        AnalyticsTrackers analyticsTrackers = AnalyticsTrackers.getInstance();
+        return analyticsTrackers.get(AnalyticsTrackers.Target.APP);
     }
 
 

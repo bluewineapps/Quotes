@@ -9,6 +9,7 @@ import java.io.Serializable;
 public class Games implements Serializable{
 
     private String name;
+    private String key;
     private String description;
     private String image;
     private String gameData;
@@ -43,5 +44,13 @@ public class Games implements Serializable{
 
     public void setGameData(String gameData) {
         this.gameData = gameData;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }

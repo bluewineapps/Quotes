@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.Tracker;
 
 
 /**
@@ -48,8 +49,8 @@ public class StoryDetailsActivity extends AppCompatActivity {
 
         storyDetailsActivity = this;
 
-     //   AnalyticsTrackers.initialize(this);
-     //   AnalyticsTrackers.getInstance().get(AnalyticsTrackers.Target.APP);
+        AnalyticsTrackers.initialize(this);
+        AnalyticsTrackers.getInstance().get(AnalyticsTrackers.Target.APP);
 
     }
 
@@ -58,8 +59,8 @@ public class StoryDetailsActivity extends AppCompatActivity {
         return storyDetailsActivity;
     }
 
-//    public synchronized Tracker getGoogleAnalyticsTracker() {
-//        AnalyticsTrackers analyticsTrackers = AnalyticsTrackers.getInstance();
-//        return analyticsTrackers.get(AnalyticsTrackers.Target.APP);
-//    }
+    public synchronized Tracker getGoogleAnalyticsTracker() {
+        AnalyticsTrackers analyticsTrackers = AnalyticsTrackers.getInstance();
+        return analyticsTrackers.get(AnalyticsTrackers.Target.APP);
+    }
 }

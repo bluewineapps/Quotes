@@ -36,6 +36,7 @@ import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.analytics.Tracker;
 
 
 import java.io.BufferedInputStream;
@@ -88,8 +89,8 @@ public class WallpaperDeatilsActivity extends AppCompatActivity {
 
         wallpaperDeatilsActivity = this;
 
-//        AnalyticsTrackers.initialize(this);
-//        AnalyticsTrackers.getInstance().get(AnalyticsTrackers.Target.APP);
+        AnalyticsTrackers.initialize(this);
+        AnalyticsTrackers.getInstance().get(AnalyticsTrackers.Target.APP);
 
         progressBar =(ProgressBar) findViewById(R.id.progress);
 
@@ -328,8 +329,8 @@ public class WallpaperDeatilsActivity extends AppCompatActivity {
         return wallpaperDeatilsActivity;
     }
 
-//    public synchronized Tracker getGoogleAnalyticsTracker() {
-//        AnalyticsTrackers analyticsTrackers = AnalyticsTrackers.getInstance();
-//        return analyticsTrackers.get(AnalyticsTrackers.Target.APP);
-//    }
+    public synchronized Tracker getGoogleAnalyticsTracker() {
+        AnalyticsTrackers analyticsTrackers = AnalyticsTrackers.getInstance();
+        return analyticsTrackers.get(AnalyticsTrackers.Target.APP);
+    }
 }

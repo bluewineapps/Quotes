@@ -22,6 +22,7 @@
     <screenName name="myoracle.com.quotes.StoryDetailsActivity">Story Details Activity Screen</screenName>
     <screenName name="myoracle.com.quotes.WallpaperDeatilsActivity">Wallpaper Details Activity Screen</screenName>
     <screenName name="myoracle.com.quotes.QuotesActivity">Quotes Details Activity Screen</screenName>
+    <screenName name="myoracle.com.quotes.MindTriksQuestionsActivity">MindTriksQuestionsActivity</screenName>
 
 
 </resources>

@@ -45,7 +45,7 @@
         </activity>
         <activity android:name=".WallpaperDeatilsActivity"/>
         <activity android:name=".MindTriksQuestionsActivity"/>
-
+        <activity android:name=".AppFeedbackActivity"/>
     </application>
 
 

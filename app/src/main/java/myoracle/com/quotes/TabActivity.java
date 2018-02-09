@@ -27,6 +27,7 @@ import com.google.android.gms.ads.InterstitialAd;
 import com.kobakei.ratethisapp.RateThisApp;
 
 import myoracle.com.quotes.adapter.MainPagerAdapter;
+import myoracle.com.quotes.model.Feedback;
 
 /**
  * Created by Midhun on 27-10-2017.
@@ -104,7 +105,7 @@ public class TabActivity extends AppCompatActivity {
                         }
                     });
                 }
-            }, 17000);
+            }, 10000);
         }
 
         add_count++;
@@ -148,7 +149,7 @@ public class TabActivity extends AppCompatActivity {
 
     private void showInterstitial() {
         if (mInterstitialAd.isLoaded()) {
-        //    mInterstitialAd.show();
+            mInterstitialAd.show();
         }
     }
 
@@ -186,6 +187,10 @@ public class TabActivity extends AppCompatActivity {
                 return true;
             case R.id.action_rate_us:
                 launchMarket();
+                return true;
+            case R.id.action_rate_feedback:
+                Intent myIntent= new Intent(getApplicationContext(), AppFeedbackActivity.class);
+                startActivity(myIntent);
                 return true;
 
         }

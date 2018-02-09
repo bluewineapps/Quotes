@@ -11,6 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+
 import java.util.ArrayList;
 
 import myoracle.com.quotes.adapter.QuotesAdapter;
@@ -26,7 +30,7 @@ public class QuotesActivity extends AppCompatActivity {
     private static QuotesActivity quotesActivity;
 
     public static int details_count =0;
-   // InterstitialAd mInterstitialAd;
+    InterstitialAd mInterstitialAd;
 
     private Toolbar toolbar;
     ViewPager viewPager;
@@ -53,14 +57,14 @@ public class QuotesActivity extends AppCompatActivity {
         this.viewPager.setAdapter(quotesAdapter);
         quotesActivity = this;
 
-//        AnalyticsTrackers.initialize(this);
-//        AnalyticsTrackers.getInstance().get(AnalyticsTrackers.Target.APP);
-//
-//     //   AnalyticsTrackers.getInstance().get(AnalyticsTrackers.Target.APP);
-//
-//        AdView mAdView = (AdView) findViewById(R.id.adViewDetails);
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        mAdView.loadAd(adRequest);
+        AnalyticsTrackers.initialize(this);
+        AnalyticsTrackers.getInstance().get(AnalyticsTrackers.Target.APP);
+
+        AnalyticsTrackers.getInstance().get(AnalyticsTrackers.Target.APP);
+
+        AdView mAdView = (AdView) findViewById(R.id.adViewDetails);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
 
 }

@@ -93,7 +93,7 @@ public class GamesFragmentAdapter extends Fragment  {
                 Intent intent;
                 intent = new Intent(getActivity(), MindTriksQuestionsActivity.class);
 
-                intent.putExtra("key","key"+position);
+                intent.putExtra("key",gamesList.get(position).getKey());
                 intent.putExtra("games",gamesList.get(position).getGameData());
                 startActivity(intent);
             }
@@ -135,6 +135,7 @@ public class GamesFragmentAdapter extends Fragment  {
                     try {
                         JSONObject gameJsonObject = jsonArray.getJSONObject(index);
                         Games games = new Games();
+                        games.setKey(gameJsonObject.getString("key"));
                         games.setImage(gameJsonObject.getString("gameImage"));
                         games.setName(gameJsonObject.getString("gameName"));
                         games.setGameData(gameJsonObject.getString("gameFile"));
