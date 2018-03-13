@@ -29,18 +29,22 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
     //This method return the fragment for the every position in the View Pager
     @Override
     public Fragment getItem(int position) {
-
         if(position ==0){
+
+            WinesAdapter winesAdapter = new WinesAdapter();
+            return winesAdapter;
+
+        }else if(position ==1){
 
             WallpaperFragmentAdapter wallpaperFragmentAdapter = new WallpaperFragmentAdapter();
             wallpaperFragmentAdapter.settabId(1);
             return wallpaperFragmentAdapter;
 
-        }else if(position == 1){
+        }else if(position == 2){
             QuotesFragmentAdapter quotesFragmentAdapter = new QuotesFragmentAdapter();
             quotesFragmentAdapter.settabId(2);
             return quotesFragmentAdapter;
-        }else if(position == 2){
+        }else if(position == 3){
             GamesFragmentAdapter gamesFragmentAdapter = new GamesFragmentAdapter();
             gamesFragmentAdapter.settabId(2);
             return gamesFragmentAdapter;

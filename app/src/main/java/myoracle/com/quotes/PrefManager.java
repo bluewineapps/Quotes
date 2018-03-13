@@ -19,7 +19,9 @@ public class PrefManager {
 
     private static final String PREF_NAME ="quotes-and-status-welcome";
     private static final String IS_FIRST_TIME_LAUNCH ="isFirstTimeLaunch";
-
+    private static final String IS_WINE_FIRST_TIME_LAUNCH ="isWineFirstTimeLaunch";
+    private static final String IS_WINE_FIRST_TIME_CREATE ="isWineFirstTimeCreate";
+    private static final String IS_WINE_SIGN_UP ="isSignUp";
 
 
 
@@ -49,5 +51,30 @@ public class PrefManager {
         return sharedPreferences.getBoolean(IS_FIRST_TIME_LAUNCH,true);
     }
 
+    public void setWinesFirstTimeLaunch(boolean isFirstTime){
+        editor.putBoolean(IS_WINE_FIRST_TIME_LAUNCH,isFirstTime);
+        editor.commit();
+    }
 
+    public boolean isWinesFirstTimeLaunch(){
+        return sharedPreferences.getBoolean(IS_WINE_FIRST_TIME_LAUNCH,true);
+    }
+
+
+    public void setWinesFirstTimeCreate(boolean isFirstTime){
+        editor.putBoolean(IS_WINE_FIRST_TIME_CREATE,isFirstTime);
+        editor.commit();
+    }
+
+    public boolean isWinesFirstTimeCreate(){
+        return sharedPreferences.getBoolean(IS_WINE_FIRST_TIME_CREATE,true);
+    }
+
+    public  boolean isSignUp(){
+        return sharedPreferences.getBoolean(IS_WINE_SIGN_UP,true);
+    }
+    public void setSignUp(boolean isFirstTime){
+        editor.putBoolean(IS_WINE_SIGN_UP,isFirstTime);
+        editor.commit();
+    }
 }

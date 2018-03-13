@@ -46,6 +46,14 @@
         <activity android:name=".WallpaperDeatilsActivity"/>
         <activity android:name=".MindTriksQuestionsActivity"/>
         <activity android:name=".AppFeedbackActivity"/>
+        <activity android:name=".WinesActivity"/>
+        <activity android:name=".PostDetailActivity"/>
+        <activity android:name=".NewPostActivity"/>
+        <activity android:name=".SignUpActivity"/>
+        <activity android:name=".LogInActivity"/>
+
+        <!-- Firebase Notifications -->
+
     </application>
 
 

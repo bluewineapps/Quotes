@@ -9,7 +9,7 @@
 
     <color name="primaryText">#212121</color>
 
-
+    <color name="bgBottomNavigation">#fe485a</color>
     <!-- Screens background color-->
     <color name="bg_screen1">#f64c73</color>
     <color name="bg_screen2">#20d2bb</color>

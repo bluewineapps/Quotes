@@ -38,6 +38,7 @@ public class MindTricksAdapter extends PagerAdapter {
     private String key;
     private LayoutInflater layoutInflater;
     private final List<MindTrick> mindTricksMain;
+    private static int indexPosision =0;
 
     private PrefManager prefManager;
 
@@ -80,20 +81,7 @@ public class MindTricksAdapter extends PagerAdapter {
         final TextView answer_txt= mindCellView.findViewById(R.id.txt_author);
         final TextView mind_question_id =mindCellView.findViewById(R.id.mind_question_id);
 
-        if(((position %11) == 0) && (position>0)){
 
-
-            AdRequest adRequest = new AdRequest.Builder()
-                    .build();
-
-            mInterstitialAd.loadAd(adRequest);
-
-            mInterstitialAd.setAdListener(new AdListener() {
-                public void onAdLoaded() {
-                    showInterstitial();
-                }
-            });
-        }
         answer_txt.setText(mindTricksMain.get(position).getAnswer());
         mindtrick_text.setText(mindTricksMain.get(position).getQuestion());
         mind_question_id.setText("# "+position);
@@ -103,6 +91,20 @@ public class MindTricksAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 if(ansFlag){
+                    if(((indexPosision %11) == 0) && (indexPosision>0)){
+
+                        indexPosision++;
+                        AdRequest adRequest = new AdRequest.Builder()
+                                .build();
+
+                        mInterstitialAd.loadAd(adRequest);
+
+                        mInterstitialAd.setAdListener(new AdListener() {
+                            public void onAdLoaded() {
+                                showInterstitial();
+                            }
+                        });
+                    }
                     answer_txt.setVisibility(View.VISIBLE);
                     ansFlag =false;
                 }else{

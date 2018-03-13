@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "228570969747",
+    "firebase_url": "https://maya-4a0e7.firebaseio.com",
+    "project_id": "maya-4a0e7",
+    "storage_bucket": "maya-4a0e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:228570969747:android:4b70a51191a43b95",
+        "android_client_info": {
+          "package_name": "myoracle.com.quotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "228570969747-4rt1hia848r7jpikuig4ebk837irktak.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMFS_6cRfJKqwY3xiSpIo0ss3hwnsHA_o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

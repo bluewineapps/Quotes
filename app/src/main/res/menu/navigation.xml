@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_shop"
+        android:icon="@drawable/ic_get_app_white_24dp"
+        android:title="@string/title_recent" />
+
+    <item
+        android:id="@+id/navigation_gifts"
+        android:icon="@drawable/ic_share_white_24dp"
+        android:title="@string/title_my_posts" />
+
+    <item
+        android:id="@+id/navigation_cart"
+        android:icon="@drawable/ic_image_white_24dp"
+        android:title="@string/title_top_posts" />
+
+
+
+</menu>

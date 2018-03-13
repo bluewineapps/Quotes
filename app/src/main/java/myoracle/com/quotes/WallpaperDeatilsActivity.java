@@ -96,6 +96,7 @@ public class WallpaperDeatilsActivity extends AppCompatActivity {
 
         mInterstitialAd = new InterstitialAd(this);
 
+
         if((details_count == 1) || ((details_count%7 == 0)&&(details_count != 0))){
 
             mInterstitialAd.setAdUnitId("ca-app-pub-8629047556008369/1480298984");
@@ -111,9 +112,11 @@ public class WallpaperDeatilsActivity extends AppCompatActivity {
                 }
             });
         }
+
+
         details_count ++;
 
-        System.out.println("==== "+checkPermission());
+
         if (!checkPermission()) {
             openActivity();
         } else {
@@ -167,9 +170,7 @@ public class WallpaperDeatilsActivity extends AppCompatActivity {
                             @Override
                             public void onResourceReady(Bitmap resource, GlideAnimation<? super
                                     Bitmap> glideAnimation) {
-
-
-                                try {
+                               try {
                                     WallpaperManager.getInstance(getApplicationContext()).setBitmap(resource);
 
                                     Snackbar snackbar = Snackbar.make(findViewById(R.id.wallpaperDetail_coordinatoeLayout),
@@ -184,11 +185,13 @@ public class WallpaperDeatilsActivity extends AppCompatActivity {
 
                             }
                         });
+
                 }
         });
         floatingActionButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 new ImageDownload(getApplicationContext()).execute(intent.getStringExtra("wallpaper"));
+
 
             }
         });

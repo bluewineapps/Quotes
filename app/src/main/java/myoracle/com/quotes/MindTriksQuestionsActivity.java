@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
@@ -119,13 +120,16 @@ public class MindTriksQuestionsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_quote_share:
 
-                TextView textView = (TextView) findViewById(R.id.quotesview);
+                Toast.makeText(getApplicationContext(),"Please share this app with 3 contacts help us to grow :)", Toast.LENGTH_SHORT).show();
+
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, textView.getText());
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "More than 3000 Selected Quotes Download Now : https://play.google.com/store/apps/details?id=myoracle.com.quotes");
+
                 sendIntent.setType("text/plain");
                 Intent.createChooser(sendIntent, "Share via");
                 startActivity(sendIntent);
+
                 return true;
 
         }
