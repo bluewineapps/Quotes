@@ -22,9 +22,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
+import com.google.firebase.database.ValueEventListener;
 
 import myoracle.com.quotes.PostDetailActivity;
 import myoracle.com.quotes.R;
+import myoracle.com.quotes.SignUpActivity;
 import myoracle.com.quotes.model.Post;
 import myoracle.com.quotes.viewholder.PostViewHolder;
 
@@ -73,12 +75,15 @@ public  class PostListFragment extends Fragment{
         mRecycler.setLayoutManager(mManager);
 
         // Set up FirebaseRecyclerAdapter with the Query
+        Query aa = mDatabase.child("posts").limitToLast(150);
+
+
+
         Query postsQuery = getQuery(mDatabase);
 
         FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Post>()
-                .setQuery(postsQuery, Post.class)
+                .setQuery(aa, Post.class)
                 .build();
-
         mAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(options) {
 
             @Override
@@ -103,11 +108,12 @@ public  class PostListFragment extends Fragment{
                     }
                 });
 
+
                 // Determine if the current user has liked this post and set UI accordingly
                 if (model.stars.containsKey(getUid())) {
-                    viewHolder.starView.setImageResource(R.drawable.ic_toggle_star_outline_24);
+                    viewHolder.starView.setImageResource(R.drawable.heart_outline);
                 } else {
-                    viewHolder.starView.setImageResource(R.drawable.ic_toggle_star_outline_24);
+                    viewHolder.starView.setImageResource(R.drawable.heart_outline);
                 }
 
                 // Bind Post to ViewHolder, setting OnClickListener for the star button
@@ -121,6 +127,7 @@ public  class PostListFragment extends Fragment{
                         // Run two transactions
                         onStarClicked(globalPostRef);
                         onStarClicked(userPostRef);
+
                     }
                 });
             }
@@ -140,11 +147,15 @@ public  class PostListFragment extends Fragment{
 
                 if (p.stars.containsKey(getUid())) {
                     // Unstar the post and remove self from stars
-                    p.starCount = p.starCount - 1;
-                    p.stars.remove(getUid());
+                    p.starCount = p.starCount + 1;
+                    if(getUid().equals("false"))
+                        startActivity(new Intent(getActivity(), SignUpActivity.class));
+                    p.stars.put(getUid(),true);
                 } else {
                     // Star the post and add self to stars
                     p.starCount = p.starCount + 1;
+                    if(getUid().equals("false"))
+                    startActivity(new Intent(getActivity(), SignUpActivity.class));
                     p.stars.put(getUid(), true);
                 }
 
@@ -185,15 +196,17 @@ public  class PostListFragment extends Fragment{
         if(FirebaseAuth.getInstance().getCurrentUser()!=null)
              return FirebaseAuth.getInstance().getCurrentUser().getUid();
         else
-            return "123456";
+
+            return "false";
     }
 
     public Query getQuery(DatabaseReference databaseReference) {
         // [START recent_posts_query]
         // Last 100 posts, these are automatically the 100 most recent
         // due to sorting by push() keys
-        Query recentPostsQuery = databaseReference.child("posts")
-                .limitToFirst(100);
+
+
+        Query recentPostsQuery = databaseReference.child("posts").orderByKey();
         // [END recent_posts_query]
 
         return recentPostsQuery;

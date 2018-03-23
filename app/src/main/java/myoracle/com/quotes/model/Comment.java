@@ -12,15 +12,17 @@ public class Comment {
     public String uid;
     public String author;
     public String text;
+    public Boolean isMale;
 
     public Comment() {
         // Default constructor required for calls to DataSnapshot.getValue(Comment.class)
     }
 
-    public Comment(String uid, String author, String text) {
+    public Comment(String uid, String author, String text,Boolean isMale) {
         this.uid = uid;
         this.author = author;
         this.text = text;
+        this.isMale=isMale;
     }
 
 }

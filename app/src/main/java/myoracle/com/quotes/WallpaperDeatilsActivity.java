@@ -97,7 +97,7 @@ public class WallpaperDeatilsActivity extends AppCompatActivity {
         mInterstitialAd = new InterstitialAd(this);
 
 
-        if((details_count == 1) || ((details_count%7 == 0)&&(details_count != 0))){
+        if((details_count == 0) || ((details_count%5 == 0)&&(details_count != 0))){
 
             mInterstitialAd.setAdUnitId("ca-app-pub-8629047556008369/1480298984");
 

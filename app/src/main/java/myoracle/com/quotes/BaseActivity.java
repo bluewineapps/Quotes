@@ -1,6 +1,7 @@
 package myoracle.com.quotes;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,7 +31,14 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public String getUid() {
-        return FirebaseAuth.getInstance().getCurrentUser().getUid();
+        if(FirebaseAuth.getInstance().getCurrentUser()==null){
+            startActivity(new Intent(BaseActivity.this,SignUpActivity.class));
+            return "123456";
+        }else{
+            return FirebaseAuth.getInstance().getCurrentUser().getUid();
+        }
+
+
     }
 
 

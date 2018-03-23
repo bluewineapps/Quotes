@@ -9,8 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -27,15 +30,18 @@ import myoracle.com.quotes.model.User;
 
 public class SignUpActivity extends BaseActivity implements View.OnClickListener {
 
-    private static final String TAG = "SignUpActivity";
-
+    public static final String TAG = SignUpActivity.class.getSimpleName();
+    private static SignUpActivity  mInstance;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private Toolbar toolbar;
     private EditText mEmailField;
     private EditText mPasswordField;
+    private EditText inputName;
     private Button mSignInButton;
     private Button mSignUpButton;
+    private RadioGroup radioSexGroup;
+    private RadioButton radioSexButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +58,19 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
         // Views
         mEmailField = findViewById(R.id.field_email);
         mPasswordField = findViewById(R.id.field_password);
+        inputName =findViewById(R.id.input_name);
+        radioSexGroup = (RadioGroup) findViewById(R.id.radioGrp);
       //  mSignInButton = findViewById(R.id.button_sign_in);
         mSignUpButton = findViewById(R.id.button_sign_up);
 
         // Click listeners
 //        mSignInButton.setOnClickListener(this);
         mSignUpButton.setOnClickListener(this);
+
+        mInstance = this;
+
+        AnalyticsTrackers.initialize(this);
+        AnalyticsTrackers.getInstance().get(AnalyticsTrackers.Target.APP);
 
         findViewById(R.id.link_login).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,6 +172,12 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
 
     private boolean validateForm() {
         boolean result = true;
+
+        if(TextUtils.isEmpty(inputName.getText().toString())){
+            inputName.setError("Required");
+            result = false;
+        }
+
         if (TextUtils.isEmpty(mEmailField.getText().toString())) {
             mEmailField.setError("Required");
             result = false;
@@ -178,7 +197,21 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
 
     // [START basic_write]
     private void writeNewUser(String userId, String name, String email) {
-        User user = new User(name, email);
+        int selectedId = radioSexGroup.getCheckedRadioButtonId();
+        radioSexButton = (RadioButton) findViewById(selectedId);
+        Toast.makeText(getApplicationContext(),
+                radioSexButton.getText(), Toast.LENGTH_SHORT).show();
+
+        String pic ="man2";
+        boolean male =true;
+        if(radioSexButton.getText().equals("Male")){
+            pic ="man2";
+        }else{
+            pic ="woman24";
+            male=false;
+        }
+
+        User user = new User(usernameFromEmail(email), email,"","",pic,male,"");
 
         mDatabase.child("users").child(userId).setValue(user);
     }
@@ -192,5 +225,12 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
         }
     }
 
+    public synchronized Tracker getGoogleAnalyticsTracker() {
+        AnalyticsTrackers analyticsTrackers = AnalyticsTrackers.getInstance();
+        return analyticsTrackers.get(AnalyticsTrackers.Target.APP);
+    }
 
+    public static synchronized SignUpActivity getInstance() {
+        return mInstance;
+    }
 }

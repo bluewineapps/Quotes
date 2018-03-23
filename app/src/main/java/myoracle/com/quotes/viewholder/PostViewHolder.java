@@ -17,6 +17,7 @@ public class PostViewHolder  extends RecyclerView.ViewHolder {
     public TextView titleView;
     public TextView authorView;
     public ImageView starView;
+    public ImageView post_author_photo;
     public TextView numStarsView;
     public TextView bodyView;
 
@@ -25,9 +26,10 @@ public class PostViewHolder  extends RecyclerView.ViewHolder {
 
         titleView = itemView.findViewById(R.id.post_title);
         authorView = itemView.findViewById(R.id.post_author);
-        starView = itemView.findViewById(R.id.star);
+        starView = itemView.findViewById(R.id.star2);
         numStarsView = itemView.findViewById(R.id.post_num_stars);
         bodyView = itemView.findViewById(R.id.post_body);
+        post_author_photo =itemView.findViewById(R.id.post_author_photo);
     }
 
     public void bindToPost(Post post, View.OnClickListener starClickListener) {
@@ -35,7 +37,11 @@ public class PostViewHolder  extends RecyclerView.ViewHolder {
         authorView.setText(post.author);
         numStarsView.setText(String.valueOf(post.starCount));
         bodyView.setText(post.body);
-
+        if(post.isMale ==null ||post.isMale)
+             post_author_photo.setImageResource(R.drawable.boy6_32);
+        else
+            post_author_photo.setImageResource(R.drawable.woman24);
         starView.setOnClickListener(starClickListener);
+
     }
 }

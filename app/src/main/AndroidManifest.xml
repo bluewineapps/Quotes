@@ -51,6 +51,8 @@
         <activity android:name=".NewPostActivity"/>
         <activity android:name=".SignUpActivity"/>
         <activity android:name=".LogInActivity"/>
+        <activity android:name=".ProfileActivity"/>
+
 
         <!-- Firebase Notifications -->
 

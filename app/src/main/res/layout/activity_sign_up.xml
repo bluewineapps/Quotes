@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@color/white"
     android:fitsSystemWindows="true">
     <include
         android:id="@+id/main_app_bar"
@@ -60,6 +61,39 @@
                 android:inputType="textPassword"
                 android:hint="Password"/>
         </android.support.design.widget.TextInputLayout>
+        <!-- Password Label -->
+        <RadioGroup
+            android:id="@+id/radioGrp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="40dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            >
+            <RadioButton
+                android:id="@+id/radioM"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:checked="true"
+                android:drawableRight="@drawable/man2"
+                android:layout_weight="1"
+                android:textSize="14dp"
+                android:text="Male"
+                />
+            <RadioButton
+                android:id="@+id/radioF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:checked="false"
+                android:drawableRight="@drawable/woman24"
+                android:layout_weight="1"
+                android:textSize="14dp"
+                android:text="Female"
+                />
+        </RadioGroup>
 
         <!-- Signup Button -->
         <android.support.v7.widget.AppCompatButton
@@ -78,6 +112,8 @@
             android:text="Already a member? Login"
             android:gravity="center"
             android:textSize="16dip"/>
+
+
 
     </LinearLayout>
 </RelativeLayout>

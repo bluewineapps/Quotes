@@ -290,7 +290,7 @@ public class TabActivity extends AppCompatActivity implements RewardedVideoAdLis
     @Override
     public void onRewardedVideoAdLoaded() {
        // Toast.makeText(this, "onRewardedVideoAdLoaded", Toast.LENGTH_SHORT).show();
-        int secondsDelayed = 20;
+        int secondsDelayed = 40;
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 mRewardedVideoAd.show();

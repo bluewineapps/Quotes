@@ -1,7 +1,9 @@
 package myoracle.com.quotes;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +55,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
     private EditText mCommentField;
     private Button mCommentButton;
     private RecyclerView mCommentsRecycler;
+    private ImageView postAuthorPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +75,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                 .child("post-comments").child(mPostKey);
 
         // Initialize Views
+        postAuthorPhoto =findViewById(R.id.post_author_photo);
         mAuthorView = findViewById(R.id.post_author);
         mTitleView = findViewById(R.id.post_title);
         mBodyView = findViewById(R.id.post_body);
@@ -84,6 +89,15 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         mCommentButton.setOnClickListener(this);
         mCommentsRecycler.setLayoutManager(new LinearLayoutManager(this));
+        mAuthorView.setOnClickListener(this);
+
+
+        postAuthorPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                autherProfile();
+            }
+        });
 
     }
 
@@ -109,6 +123,10 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                 mAuthorView.setText(post.author);
                 mTitleView.setText(post.title);
                 mBodyView.setText(post.body);
+                if(post.isMale ==null || post.isMale ==true)
+                    postAuthorPhoto.setImageResource(R.drawable.boy6_32);
+                else
+                    postAuthorPhoto.setImageResource(R.drawable.woman24);
                 // [END_EXCLUDE]
             }
 
@@ -152,6 +170,18 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         if (i == R.id.button_post_comment) {
             postComment();
         }
+
+        if(i==R.id.post_author){
+           // autherProfile();
+        }
+
+        if(i==R.id.post_author_layout){
+            //autherProfile();
+        }
+    }
+
+    private void autherProfile() {
+        startActivity(new Intent(PostDetailActivity.this,ProfileActivity.class));
     }
 
     private void postComment() {
@@ -163,10 +193,10 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                         // Get user information
                         User user = dataSnapshot.getValue(User.class);
                         String authorName = user.username;
-
+                        Boolean isMale=user.isMale();
                         // Create new comment object
                         String commentText = mCommentField.getText().toString();
-                        Comment comment = new Comment(uid, authorName, commentText);
+                        Comment comment = new Comment(uid, authorName, commentText,isMale);
 
                         // Push the comment, it will appear in the list
                         mCommentsReference.push().setValue(comment);
@@ -186,12 +216,14 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
 
         public TextView authorView;
         public TextView bodyView;
+        public ImageView imageView;
 
         public CommentViewHolder(View itemView) {
             super(itemView);
 
             authorView = itemView.findViewById(R.id.comment_author);
             bodyView = itemView.findViewById(R.id.comment_body);
+            imageView =itemView.findViewById(R.id.comment_photo);
         }
     }
 
@@ -310,6 +342,10 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
             Comment comment = mComments.get(position);
             holder.authorView.setText(comment.author);
             holder.bodyView.setText(comment.text);
+            if( comment.isMale ==null || comment.isMale == true  )
+                holder.imageView.setImageResource(R.drawable.boy6_32);
+            else
+                holder.imageView.setImageResource(R.drawable.woman24);
         }
 
         @Override
