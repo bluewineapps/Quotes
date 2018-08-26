@@ -14,6 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,6 +50,7 @@ public class WallpaperFragmentAdapter extends Fragment {
     private List<WallpaperMain> wallpaperMains = new ArrayList<>();
     private WallPaperAdapter wallPaperAdapter;
 
+    public static Integer ADD_COUNT=1;
 
     RecyclerView recyclerView;
 
@@ -62,6 +68,7 @@ public class WallpaperFragmentAdapter extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.content_main, null);
         setUpView(root);
+
         return root;
     }
 
@@ -82,11 +89,15 @@ public class WallpaperFragmentAdapter extends Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Intent intent;
-                intent = new Intent(getActivity(), WallpaperDeatilsActivity.class);
-                intent.putExtra("wallpaper",wallpaperList.get(position).getWallpaper().getLarge());
-                intent.putExtra("position",position);
-                startActivity(intent);
+
+
+                callWallPaperDetails(position);
+
+
+
+
+                ADD_COUNT++;
+
             }
 
             @Override
@@ -98,7 +109,17 @@ public class WallpaperFragmentAdapter extends Fragment {
 
     }
 
-     class WallPaperListDownlaoderTask extends AsyncTask<String,Integer,JSONArray> {
+    private void callWallPaperDetails(int position) {
+
+        Intent intent;
+        intent = new Intent(getActivity(), WallpaperDeatilsActivity.class);
+        intent.putExtra("wallpaper",wallpaperList.get(position).getWallpaper().getLarge());
+        intent.putExtra("position",position);
+        startActivity(intent);
+    }
+
+
+    class WallPaperListDownlaoderTask extends AsyncTask<String,Integer,JSONArray> {
 
         OkHttpClient client = new OkHttpClient();
         @Override

@@ -63,7 +63,7 @@ public class WallpaperDeatilsActivity extends AppCompatActivity {
 
     public static int details_count =0;
 
-    InterstitialAd mInterstitialAd;
+
     ImageView wallPaperDetailsImageview;
     ImageButton wallpaperDetailDownloadButton;
     ImageButton wallpaperDetailSetButton;
@@ -94,24 +94,10 @@ public class WallpaperDeatilsActivity extends AppCompatActivity {
 
         progressBar =(ProgressBar) findViewById(R.id.progress);
 
-        mInterstitialAd = new InterstitialAd(this);
 
 
-        if((details_count == 0) || ((details_count%5 == 0)&&(details_count != 0))){
 
-            mInterstitialAd.setAdUnitId("ca-app-pub-8629047556008369/1480298984");
 
-            AdRequest adRequest = new AdRequest.Builder()
-                    .build();
-
-            mInterstitialAd.loadAd(adRequest);
-
-            mInterstitialAd.setAdListener(new AdListener() {
-                public void onAdLoaded() {
-                    showInterstitial();
-                }
-            });
-        }
 
 
         details_count ++;
@@ -198,11 +184,6 @@ public class WallpaperDeatilsActivity extends AppCompatActivity {
         
     }
 
-    private void showInterstitial() {
-        if (mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
-        }
-    }
 
 
     class ImageDownload extends AsyncTask<String, String, String> {

@@ -1,5 +1,8 @@
 package myoracle.com.quotes;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,6 +15,7 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -41,15 +45,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.kobakei.ratethisapp.RateThisApp;
 
-import myoracle.com.quotes.adapter.MainPagerAdapter;
+import java.util.Random;
+import java.util.TimeZone;
 
+import myoracle.com.quotes.adapter.MainPagerAdapter;
+import myoracle.com.quotes.notification.NotificationPublisher;
 
 
 /**
  * Created by Midhun on 27-10-2017.
  */
 
-public class TabActivity extends AppCompatActivity implements RewardedVideoAdListener {
+public class TabActivity extends AppCompatActivity {
 
     public static final String TAG = TabActivity.class.getSimpleName();
     private static TabActivity mInstance;
@@ -60,7 +67,7 @@ public class TabActivity extends AppCompatActivity implements RewardedVideoAdLis
     private ViewPager pager;
 
     MainPagerAdapter adapter;
-    CharSequence Titles[] = {"WINES","WALLPAPERS","QUOTES","MIND TRICKS","STORIES"};
+    CharSequence Titles[] = {"WINES","WALLPAPERS","QUOTES","MIND TRICKS","STORIES","VIDEOS"};
     CoordinatorLayout coordinatorLayout;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
 
@@ -79,7 +86,7 @@ public class TabActivity extends AppCompatActivity implements RewardedVideoAdLis
         tabs = (TabLayout) findViewById(R.id.tabs);
         pager = (ViewPager) findViewById(R.id.pager);
 
-
+        scheduleNotification(getNotification("5 second delay"), 600000);
         if(prefManager.isSignUp() && !prefManager.isWinesFirstTimeLaunch() &&(FirebaseAuth.getInstance().getCurrentUser()==null)){
             prefManager.setSignUp(false);
             startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
@@ -91,14 +98,6 @@ public class TabActivity extends AppCompatActivity implements RewardedVideoAdLis
 
         TabLayout.Tab tab = tabs.getTabAt(1);
         tab.select();
-
-        MobileAds.initialize(this,
-                "ca-app-pub-8629047556008369~6041629330");
-
-        // Use an activity context to get the rewarded video instance.
-        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
-        mRewardedVideoAd.setRewardedVideoAdListener(this);
-        loadVideoAdd();
 
 
         mInstance = this;
@@ -249,65 +248,36 @@ public class TabActivity extends AppCompatActivity implements RewardedVideoAdLis
         }
     }
 
-    public void displayInterstitial() {
-// If Ads are loaded, show Interstitial else show nothing.
-        if (interstitial.isLoaded()) {
-            interstitial.show();
-        }
+
+
+    private void scheduleNotification(Notification notification, int delay) {
+
+        System.out.println("----------------------------- Sheduller started -----------------");
+        Intent notificationIntent = new Intent(this, NotificationPublisher.class);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        long futureInMillis = SystemClock.elapsedRealtime() + delay;
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
 
     }
 
+    private Notification getNotification(String content) {
+        Notification.Builder builder = new Notification.Builder(this);
+        builder.setContentTitle(getRandomMsg());
+        builder.setContentText(content);
+        builder.setSmallIcon(R.drawable.logo);
 
-    private void loadVideoAdd(){
-
-        mRewardedVideoAd.loadAd("ca-app-pub-8629047556008369/7316802108",
-                new AdRequest.Builder().build());
-
+        return builder.build();
     }
 
 
+    public CharSequence getRandomMsg() {
 
-    @Override
-    public void onRewarded(RewardItem reward) {
-        //// Reward the user.
+        String[] quotesArray =getResources().getStringArray(R.array.shortQuotes);
+        String[] contentQuote = quotesArray[new Random().nextInt(quotesArray.length)].split("\\n");
+        return contentQuote[0];
     }
-
-    @Override
-    public void onRewardedVideoAdLeftApplication() {
-        //        Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onRewardedVideoAdClosed() {
-        //Toast.makeText(this, "onRewardedVideoAdClosed", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onRewardedVideoAdFailedToLoad(int errorCode) {
-       // Toast.makeText(this, "onRewardedVideoAdFailedToLoad"+errorCode, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onRewardedVideoAdLoaded() {
-       // Toast.makeText(this, "onRewardedVideoAdLoaded", Toast.LENGTH_SHORT).show();
-        int secondsDelayed = 40;
-        new Handler().postDelayed(new Runnable() {
-            public void run() {
-                mRewardedVideoAd.show();
-            }
-        }, secondsDelayed * 1000);
-
-    }
-
-    @Override
-    public void onRewardedVideoAdOpened() {
-       // Toast.makeText(this, "onRewardedVideoAdOpened", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onRewardedVideoStarted() {
-       // Toast.makeText(this, "onRewardedVideoStarted", Toast.LENGTH_SHORT).show();
-    }
-
-
 }

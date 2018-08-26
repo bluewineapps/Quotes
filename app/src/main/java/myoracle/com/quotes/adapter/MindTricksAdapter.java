@@ -97,13 +97,7 @@ public class MindTricksAdapter extends PagerAdapter {
                         AdRequest adRequest = new AdRequest.Builder()
                                 .build();
 
-                        mInterstitialAd.loadAd(adRequest);
 
-                        mInterstitialAd.setAdListener(new AdListener() {
-                            public void onAdLoaded() {
-                                showInterstitial();
-                            }
-                        });
                     }
                     answer_txt.setVisibility(View.VISIBLE);
                     ansFlag =false;
@@ -119,11 +113,7 @@ public class MindTricksAdapter extends PagerAdapter {
         prefManager.setMindTrickQuestionNo(key,position);
         return mindCellView;
     }
-    private void showInterstitial() {
-        if (mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
-        }
-    }
+
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {

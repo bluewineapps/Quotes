@@ -1,11 +1,16 @@
 package myoracle.com.quotes;
 
+import android.annotation.TargetApi;
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -32,6 +37,7 @@ import myoracle.com.quotes.adapter.CategoriesAdapter;
 import myoracle.com.quotes.listener.RecyclerTouchListener;
 import myoracle.com.quotes.model.Categories;
 import myoracle.com.quotes.model.Quote;
+import myoracle.com.quotes.notification.NotificationPublisher;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private CategoriesAdapter categoriesAdapter;
     final Context context = this;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,11 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.main_app_bar);
         setSupportActionBar(toolbar);
+
+
+
+
+
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
@@ -192,5 +201,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, " unable to find market app", Toast.LENGTH_LONG).show();
         }
     }
+
 
 }

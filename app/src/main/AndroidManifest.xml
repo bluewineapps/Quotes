@@ -53,7 +53,7 @@
         <activity android:name=".LogInActivity"/>
         <activity android:name=".ProfileActivity"/>
 
-
+        <receiver android:name=".notification.NotificationPublisher" />
         <!-- Firebase Notifications -->
 
     </application>

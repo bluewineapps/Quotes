@@ -20,8 +20,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 import myoracle.com.quotes.model.Post;
 import myoracle.com.quotes.model.User;
@@ -173,7 +176,11 @@ public class NewPostActivity  extends BaseActivity {
         String key = mDatabase.child("posts").push().getKey();
         if(isMale==null)
             isMale=false;
-        Post post = new Post(userId, username, title, body,isMale);
+
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss a");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        String dateTime = dateFormat.format(new Date());
+        Post post = new Post(userId, username, title, body,isMale,dateTime);
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
