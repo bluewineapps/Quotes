@@ -105,11 +105,6 @@ public class TabActivity extends AppCompatActivity {
         AnalyticsTrackers.initialize(this);
         AnalyticsTrackers.getInstance().get(AnalyticsTrackers.Target.APP);
 
-
-        AdView mAdView = (AdView) findViewById(R.id.addViewQuotesList);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
         // Monitor launch times and interval from installation
         RateThisApp.onCreate(this);
         RateThisApp.Config config = new RateThisApp.Config(3, 4);

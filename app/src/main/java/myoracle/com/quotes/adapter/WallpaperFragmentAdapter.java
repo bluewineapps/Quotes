@@ -80,7 +80,9 @@ public class WallpaperFragmentAdapter extends Fragment {
 
     void setUPList(){
 
-        new WallPaperListDownlaoderTask().execute("https://bluewineapps.github.io/wallpaper.json");
+        new WallPaperListDownlaoderTask().execute("https://quotesandstatus.herokuapp.com/api/v1/wallpaper");
+
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),3);
         wallPaperAdapter = new WallPaperAdapter(wallpaperList,getActivity());
@@ -90,7 +92,7 @@ public class WallpaperFragmentAdapter extends Fragment {
             @Override
             public void onClick(View view, int position) {
 
-
+                updateViewCount(wallpaperList.get(position).getId().toString());
                 callWallPaperDetails(position);
 
 
@@ -109,6 +111,12 @@ public class WallpaperFragmentAdapter extends Fragment {
 
     }
 
+    private void updateViewCount(String position) {
+
+        new WallpaperViewUpdate().execute("https://quotesandstatus.herokuapp.com/api/v1/wallpaper/"+position);
+
+    }
+
     private void callWallPaperDetails(int position) {
 
         Intent intent;
@@ -119,7 +127,32 @@ public class WallpaperFragmentAdapter extends Fragment {
     }
 
 
+    class WallpaperViewUpdate extends  AsyncTask<String,String,String>{
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+
+            OkHttpClient client = new OkHttpClient();
+
+            String url =strings[0];
+            System.out.println(url);
+
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
     class WallPaperListDownlaoderTask extends AsyncTask<String,Integer,JSONArray> {
+
 
         OkHttpClient client = new OkHttpClient();
         @Override
@@ -133,27 +166,33 @@ public class WallpaperFragmentAdapter extends Fragment {
         protected JSONArray doInBackground(String... params) {
 
             String url =params[0];
+            System.out.println(url);
             Request request = new Request.Builder()
                     .url(url)
                     .build();
             try{
+
                 Response response = client.newCall(request).execute();
                 String apiResponseString=response.body().string();
+
                 JSONArray jsonArray = new JSONArray(apiResponseString);
 
-                for(int index =jsonArray.length();index>0;index--){
+                for(int index =0;index<jsonArray.length();index++){
                     try {
                         JSONObject wallpaperMainsJsonObj = jsonArray.getJSONObject(index);
                         WallpaperMain wallpaperMain = new WallpaperMain();
                         wallpaperMain.setId(wallpaperMainsJsonObj.getInt("id"));
                         Wallpaper wallpaper = new Wallpaper();
-                        JSONObject wallpaperJsonObj = wallpaperMainsJsonObj.getJSONObject("wallpaper");
-                        wallpaper.setLarge(wallpaperJsonObj.getString("large"));
-                        wallpaper.setSmall(wallpaperJsonObj.getString("small"));
-                        wallpaper.setMedium(wallpaperJsonObj.getString("medium"));
+
+                        wallpaper.setLarge(wallpaperMainsJsonObj.getString("large"));
+                        wallpaper.setSmall(wallpaperMainsJsonObj.getString("small"));
+                        wallpaper.setMedium(wallpaperMainsJsonObj.getString("medium"));
+                        wallpaper.setView(wallpaperMainsJsonObj.getString("view"));
                         wallpaperMain.setWallpaper(wallpaper);
                         wallpaperMains.add(wallpaperMain);
                     } catch (JSONException e) {
+                        e.printStackTrace();
+                        System.out.println("eror happent in json paesinf");
                         Log.v("",e.getMessage());
                     }
 
@@ -171,6 +210,7 @@ public class WallpaperFragmentAdapter extends Fragment {
         protected void onPostExecute(JSONArray jsonArray) {
 
            super.onPostExecute(jsonArray);
+
            wallpaperList.addAll(wallpaperMains);
            recyclerView.setAdapter(wallPaperAdapter);
            wallPaperAdapter.notifyDataSetChanged();

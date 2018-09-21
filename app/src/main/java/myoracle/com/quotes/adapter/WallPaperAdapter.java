@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -33,6 +34,7 @@ public class WallPaperAdapter extends RecyclerView.Adapter<WallPaperAdapter.MyVi
     public WallPaperAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.wallpaper_item, null);
+
         WallPaperAdapter.MyViewHolder viewHolder = new WallPaperAdapter.MyViewHolder(itemLayoutView);
         return viewHolder;
     }
@@ -43,6 +45,7 @@ public class WallPaperAdapter extends RecyclerView.Adapter<WallPaperAdapter.MyVi
                 .load(wallpaperMains.get(position).getWallpaper().getMedium())
                 .into(holder.waIlpapermageView);
 
+        holder.wallpaperItem_ViewCount.setText(wallpaperMains.get(position).getWallpaper().getView());
        // holder.waIlpapermageView.setImageResource(R.drawable.name);
     }
 
@@ -55,11 +58,12 @@ public class WallPaperAdapter extends RecyclerView.Adapter<WallPaperAdapter.MyVi
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-
+        TextView wallpaperItem_ViewCount;
         ImageView waIlpapermageView;
         public MyViewHolder(View itemView) {
             super(itemView);
             waIlpapermageView =(ImageView) itemView.findViewById(R.id.wallpaperItem_imageView);
+            wallpaperItem_ViewCount =itemView.findViewById(R.id.wallpaperItem_ViewCount);
         }
     }
 }

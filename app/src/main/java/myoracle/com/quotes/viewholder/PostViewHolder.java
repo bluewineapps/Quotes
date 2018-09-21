@@ -61,18 +61,21 @@ public class PostViewHolder  extends RecyclerView.ViewHolder {
     }
 
     private String getLocalTime(String time) {
-        SimpleDateFormat df = new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a");
-        Date date = null;
-        try {
-            date = df.parse(time);
-        } catch (ParseException e) {
-            Log.d("time error ",e.getMessage());
+        SimpleDateFormat df = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss a");
+        SimpleDateFormat df2 = new SimpleDateFormat("dd MMM yyyy hh:mm ");
+
+        if (time != null || !time.isEmpty()) {
+            try {
+                Date date = df.parse(time);
+                long localTime = date.getTime() + TimeZone.getDefault().getRawOffset();
+                date = new Date(localTime);
+                String formattedDate = df2.format(date);
+                return formattedDate;
+            } catch (ParseException e) {
+                Log.d("time error ", e.getMessage());
+            }
         }
+            return "";
 
-        long localTime = date.getTime()+TimeZone.getDefault().getRawOffset();
-        date =new Date(localTime);
-
-        String formattedDate = df.format(date);
-        return formattedDate;
     }
 }

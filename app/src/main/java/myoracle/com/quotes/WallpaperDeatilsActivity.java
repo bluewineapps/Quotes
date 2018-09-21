@@ -95,11 +95,6 @@ public class WallpaperDeatilsActivity extends AppCompatActivity {
         progressBar =(ProgressBar) findViewById(R.id.progress);
 
 
-
-
-
-
-
         details_count ++;
 
 
@@ -199,7 +194,7 @@ public class WallpaperDeatilsActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
             String src = params[0];
-            String dst = Environment.getExternalStorageDirectory().toString();;
+            String dst = Environment.getRootDirectory().toString();;
 
             try {
                 File file = Glide.with(context)
