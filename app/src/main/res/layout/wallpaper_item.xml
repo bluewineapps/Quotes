@@ -13,25 +13,4 @@
         android:scaleType="fitXY"
         />
 
-    <LinearLayout
-        android:paddingTop="170dp"
-        android:paddingLeft="70dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/wallpaperItem_ViewCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="101"/>
-        <ImageView
-            android:id="@+id/star2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
-            android:background="?attr/selectableItemBackground"
-            android:src="@drawable/view" />
-    </LinearLayout>
-
 </RelativeLayout>

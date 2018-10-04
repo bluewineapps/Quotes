@@ -11,7 +11,7 @@ public class Wallpaper implements Serializable {
    private String small;
    private String medium;
    private String large;
-   private String view;
+
 
     public String getSmall() {
         return small;
@@ -37,11 +37,4 @@ public class Wallpaper implements Serializable {
         this.large = large;
     }
 
-    public String getView() {
-        return view;
-    }
-
-    public void setView(String view) {
-        this.view = view;
-    }
 }

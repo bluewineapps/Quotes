@@ -12,12 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.reward.RewardedVideoAd;
-import com.google.android.gms.ads.reward.RewardedVideoAdListener;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,11 +33,9 @@ public class MindTricksAdapter extends PagerAdapter {
     private String key;
     private LayoutInflater layoutInflater;
     private final List<MindTrick> mindTricksMain;
-    private static int indexPosision =0;
-
     private PrefManager prefManager;
 
-    InterstitialAd mInterstitialAd;
+
     public MindTricksAdapter(Context applicationContext, List<MindTrick> mindTricks,String key) {
         super();
 
@@ -50,8 +43,6 @@ public class MindTricksAdapter extends PagerAdapter {
         this.context=applicationContext;
         this.mindTricksMain=mindTricks;
         this.prefManager =new PrefManager(applicationContext);
-        mInterstitialAd = new InterstitialAd(context);
-        mInterstitialAd.setAdUnitId("ca-app-pub-8629047556008369/1480298984");
 
     }
 
@@ -91,14 +82,7 @@ public class MindTricksAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 if(ansFlag){
-                    if(((indexPosision %11) == 0) && (indexPosision>0)){
 
-                        indexPosision++;
-                        AdRequest adRequest = new AdRequest.Builder()
-                                .build();
-
-
-                    }
                     answer_txt.setVisibility(View.VISIBLE);
                     ansFlag =false;
                 }else{
@@ -109,7 +93,7 @@ public class MindTricksAdapter extends PagerAdapter {
             }
         });
 
-        container.addView(mindCellView);
+
         prefManager.setMindTrickQuestionNo(key,position);
         return mindCellView;
     }

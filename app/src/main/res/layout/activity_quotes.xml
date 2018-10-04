@@ -20,15 +20,6 @@
         android:layout_height="wrap_content">
     </android.support.v4.view.ViewPager>
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adViewDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-8629047556008369/6954247551">
-    </com.google.android.gms.ads.AdView>
 
 
 </RelativeLayout>

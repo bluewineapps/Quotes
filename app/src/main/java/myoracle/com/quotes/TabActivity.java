@@ -32,15 +32,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.reward.RewardItem;
-import com.google.android.gms.ads.reward.RewardedVideoAd;
-import com.google.android.gms.ads.reward.RewardedVideoAdListener;
+
 import com.google.android.gms.analytics.Tracker;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.kobakei.ratethisapp.RateThisApp;
@@ -67,14 +61,9 @@ public class TabActivity extends AppCompatActivity {
     private ViewPager pager;
 
     MainPagerAdapter adapter;
-    CharSequence Titles[] = {"WINES","WALLPAPERS","QUOTES","MIND TRICKS","STORIES","VIDEOS"};
+    CharSequence Titles[] = {"WINES","WALLPAPERS","QUOTES","MIND TRICKS","STORIES"};
     CoordinatorLayout coordinatorLayout;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
-
-
-    private RewardedVideoAd mRewardedVideoAd ;
-    private InterstitialAd mInterstitialAd;
-    private InterstitialAd interstitial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +75,10 @@ public class TabActivity extends AppCompatActivity {
         tabs = (TabLayout) findViewById(R.id.tabs);
         pager = (ViewPager) findViewById(R.id.pager);
 
-        scheduleNotification(getNotification("5 second delay"), 600000);
+       // scheduleNotification(getNotification("5 second delay"), 600000);
+
+
+
         if(prefManager.isSignUp() && !prefManager.isWinesFirstTimeLaunch() &&(FirebaseAuth.getInstance().getCurrentUser()==null)){
             prefManager.setSignUp(false);
             startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
@@ -227,6 +219,10 @@ public class TabActivity extends AppCompatActivity {
             case R.id.action_rate_feedback:
                 Intent myIntent= new Intent(getApplicationContext(), AppFeedbackActivity.class);
                 startActivity(myIntent);
+                return true;
+            case  R.id.privacy_policy:
+                Intent myIntents= new Intent(getApplicationContext(), PrivacyActivity.class);
+                startActivity(myIntents);
                 return true;
 
         }

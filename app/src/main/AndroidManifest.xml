@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="myoracle.com.quotes">
 
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
@@ -11,6 +14,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 
     <application
         android:allowBackup="true"
@@ -52,9 +56,18 @@
         <activity android:name=".SignUpActivity"/>
         <activity android:name=".LogInActivity"/>
         <activity android:name=".ProfileActivity"/>
-
+        <activity android:name=".PrivacyActivity"/>
         <receiver android:name=".notification.NotificationPublisher" />
         <!-- Firebase Notifications -->
+
+        <activity
+            android:name="com.inmobi.rendering.InMobiAdActivity"
+            android:configChanges="keyboardHidden|orientation|keyboard|smallestScreenSize|screenSize|screenLayout"
+            android:hardwareAccelerated="true"
+            android:resizeableActivity="false"
+            android:theme="@android:style/Theme.NoTitleBar"
+            tools:ignore="UnusedAttribute" />
+
 
     </application>
 

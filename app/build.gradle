@@ -7,8 +7,8 @@ android {
         applicationId "myoracle.com.quotes"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 30
-        versionName "4.8"
+        versionCode 31
+        versionName "4.81"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -26,15 +26,23 @@ dependencies {
 
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
-
-    compile 'com.google.android.gms:play-services-ads:11.8.0'
     compile 'com.google.android.gms:play-services-analytics:11.8.0'
     compile 'com.google.firebase:firebase-auth:11.8.0'
     compile 'com.google.firebase:firebase-messaging:11.8.0'
     compile 'com.google.firebase:firebase-database:11.8.0'
 
+    compile 'com.google.android.gms:play-services-base:11.8.0'
+    compile 'com.google.android.gms:play-services-ads:11.8.0'
+    compile 'com.google.android.gms:play-services-location:11.8.0'
+    compile 'com.google.android.gms:play-services-plus:11.8.0'
+
     compile 'com.firebaseui:firebase-ui-database:3.2.2'
-    compile files('libs/YouTubeAndroidPlayerApi.jar')
+
+
+    compile 'com.inmobi.monetization:inmobi-ads:7.2.0'
+
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.android.support:support-v4:27.1.0'
 
 
     testImplementation 'junit:junit:4.12'

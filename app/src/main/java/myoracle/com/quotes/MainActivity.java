@@ -41,7 +41,7 @@ import myoracle.com.quotes.notification.NotificationPublisher;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static int add_count =0;
+
 
     private List<Categories> categoriesList = new ArrayList<Categories>();
     private RecyclerView recyclerView;

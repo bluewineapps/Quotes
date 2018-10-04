@@ -14,10 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,9 +46,6 @@ public class WallpaperFragmentAdapter extends Fragment {
     private List<WallpaperMain> wallpaperList = new ArrayList<WallpaperMain>();
     private List<WallpaperMain> wallpaperMains = new ArrayList<>();
     private WallPaperAdapter wallPaperAdapter;
-
-    public static Integer ADD_COUNT=1;
-
     RecyclerView recyclerView;
 
     private int tabId ;
@@ -80,7 +74,7 @@ public class WallpaperFragmentAdapter extends Fragment {
 
     void setUPList(){
 
-        new WallPaperListDownlaoderTask().execute("https://quotesandstatus.herokuapp.com/api/v1/wallpaper");
+        new WallPaperListDownlaoderTask().execute("https://raw.githubusercontent.com/bluewineapps/bluewineapps.github.io/master/wallpaper.json");
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -95,11 +89,6 @@ public class WallpaperFragmentAdapter extends Fragment {
                 updateViewCount(wallpaperList.get(position).getId().toString());
                 callWallPaperDetails(position);
 
-
-
-
-                ADD_COUNT++;
-
             }
 
             @Override
@@ -113,7 +102,7 @@ public class WallpaperFragmentAdapter extends Fragment {
 
     private void updateViewCount(String position) {
 
-        new WallpaperViewUpdate().execute("https://quotesandstatus.herokuapp.com/api/v1/wallpaper/"+position);
+      //  new WallpaperViewUpdate().execute("https://quotesandstatus.herokuapp.com/api/v1/wallpaper/"+position);
 
     }
 
@@ -137,7 +126,7 @@ public class WallpaperFragmentAdapter extends Fragment {
             OkHttpClient client = new OkHttpClient();
 
             String url =strings[0];
-            System.out.println(url);
+
 
             Request request = new Request.Builder()
                     .url(url)
@@ -183,11 +172,11 @@ public class WallpaperFragmentAdapter extends Fragment {
                         WallpaperMain wallpaperMain = new WallpaperMain();
                         wallpaperMain.setId(wallpaperMainsJsonObj.getInt("id"));
                         Wallpaper wallpaper = new Wallpaper();
+                        JSONObject wallpaperJsonObj = wallpaperMainsJsonObj.getJSONObject("wallpaper");
+                        wallpaper.setLarge(wallpaperJsonObj.getString("large"));
+                        wallpaper.setSmall(wallpaperJsonObj.getString("small"));
+                        wallpaper.setMedium(wallpaperJsonObj.getString("medium"));
 
-                        wallpaper.setLarge(wallpaperMainsJsonObj.getString("large"));
-                        wallpaper.setSmall(wallpaperMainsJsonObj.getString("small"));
-                        wallpaper.setMedium(wallpaperMainsJsonObj.getString("medium"));
-                        wallpaper.setView(wallpaperMainsJsonObj.getString("view"));
                         wallpaperMain.setWallpaper(wallpaper);
                         wallpaperMains.add(wallpaperMain);
                     } catch (JSONException e) {

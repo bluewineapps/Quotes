@@ -45,7 +45,7 @@ public class WallPaperAdapter extends RecyclerView.Adapter<WallPaperAdapter.MyVi
                 .load(wallpaperMains.get(position).getWallpaper().getMedium())
                 .into(holder.waIlpapermageView);
 
-        holder.wallpaperItem_ViewCount.setText(wallpaperMains.get(position).getWallpaper().getView());
+       // holder.wallpaperItem_ViewCount.setText(wallpaperMains.get(position).getWallpaper().getView());
        // holder.waIlpapermageView.setImageResource(R.drawable.name);
     }
 
@@ -58,12 +58,12 @@ public class WallPaperAdapter extends RecyclerView.Adapter<WallPaperAdapter.MyVi
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView wallpaperItem_ViewCount;
+       // TextView wallpaperItem_ViewCount;
         ImageView waIlpapermageView;
         public MyViewHolder(View itemView) {
             super(itemView);
             waIlpapermageView =(ImageView) itemView.findViewById(R.id.wallpaperItem_imageView);
-            wallpaperItem_ViewCount =itemView.findViewById(R.id.wallpaperItem_ViewCount);
+            //wallpaperItem_ViewCount =itemView.findViewById(R.id.wallpaperItem_ViewCount);
         }
     }
 }
