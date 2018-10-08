@@ -29,6 +29,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,8 +38,12 @@ import com.google.android.gms.analytics.Tracker;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.inmobi.ads.InMobiAdRequestStatus;
+import com.inmobi.ads.InMobiBanner;
+import com.inmobi.ads.InMobiInterstitial;
 import com.kobakei.ratethisapp.RateThisApp;
 
+import java.util.Map;
 import java.util.Random;
 import java.util.TimeZone;
 
@@ -50,7 +55,7 @@ import myoracle.com.quotes.notification.NotificationPublisher;
  * Created by Midhun on 27-10-2017.
  */
 
-public class TabActivity extends AppCompatActivity {
+public class TabActivity extends AppCompatActivity implements InMobiInterstitial.InterstitialAdRequestListener{
 
     public static final String TAG = TabActivity.class.getSimpleName();
     private static TabActivity mInstance;
@@ -69,6 +74,17 @@ public class TabActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_activity);
+
+
+
+        InMobiBanner bannerAd = new InMobiBanner(this, 1540093933823L);
+        RelativeLayout adContainer = findViewById(R.id.banner2);
+        float density = getResources().getDisplayMetrics().density;
+        RelativeLayout.LayoutParams bannerLp = new RelativeLayout.LayoutParams((int) (620 * density), (int) (50 * density));
+        adContainer.addView(bannerAd, bannerLp);
+        bannerAd.load();
+
+
         PrefManager prefManager = new PrefManager(getApplicationContext());
         builder = new AlertDialog.Builder(this);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -99,7 +115,7 @@ public class TabActivity extends AppCompatActivity {
 
         // Monitor launch times and interval from installation
         RateThisApp.onCreate(this);
-        RateThisApp.Config config = new RateThisApp.Config(3, 4);
+        RateThisApp.Config config = new RateThisApp.Config(3, 2);
         RateThisApp.init(config);
         // If the condition is satisfied, "Rate this app" dialog will be shown
         RateThisApp.showRateDialogIfNeeded(this);
@@ -149,6 +165,61 @@ public class TabActivity extends AppCompatActivity {
             alert.setTitle(" Happily Introducing Wines ..");
             alert.show();
         }
+
+
+        final InMobiInterstitial interstitial = new InMobiInterstitial(this,1538886935874L, new InMobiInterstitial.InterstitialAdListener2() {
+            @Override
+            public void onAdRewardActionCompleted(InMobiInterstitial ad, Map rewards) {}
+            @Override
+            public void onAdDisplayed(InMobiInterstitial ad) {
+                Log.d(TAG, "onAdDisplayed: ");
+            }
+            @Override
+            public void onAdDismissed(InMobiInterstitial ad) {
+                Log.d(TAG, "onAdDismissed: ");
+            }
+            @Override
+            public void onAdInteraction(InMobiInterstitial ad, Map params) {}
+            @Override
+            public void onAdLoadSucceeded(final InMobiInterstitial ad) {
+                Log.d(TAG, "onAdLoadSucceeded: ");
+            }
+
+            @Override
+            public void onAdDisplayFailed(InMobiInterstitial inMobiInterstitial) {
+                Log.d(TAG, "onAdDisplayFailed: ");
+            }
+
+            @Override
+            public void onAdWillDisplay(InMobiInterstitial inMobiInterstitial) {
+                Log.d(TAG, "onAdWillDisplay: ");
+            }
+
+            @Override
+            public void onAdLoadFailed(InMobiInterstitial ad, InMobiAdRequestStatus requestStatus) {
+                Log.d(TAG, "onAdLoadFailed: " + requestStatus.getMessage());
+            }
+
+            @Override
+            public void onAdReceived(InMobiInterstitial inMobiInterstitial) {
+                Log.d(TAG, "onAdReceived: ");
+            }
+
+            @Override
+            public void onUserLeftApplication(InMobiInterstitial ad){
+                Log.d(TAG, "onUserLeftApplication: ");
+            }
+        });
+        interstitial.load();
+
+        int secondsDelayed = 10;
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                if(interstitial.isReady())
+                    interstitial.show();
+            }
+        }, secondsDelayed * 1500);
+
     }
 
 
@@ -270,5 +341,11 @@ public class TabActivity extends AppCompatActivity {
         String[] quotesArray =getResources().getStringArray(R.array.shortQuotes);
         String[] contentQuote = quotesArray[new Random().nextInt(quotesArray.length)].split("\\n");
         return contentQuote[0];
+    }
+
+
+    @Override
+    public void onAdRequestCompleted(InMobiAdRequestStatus inMobiAdRequestStatus, InMobiInterstitial inMobiInterstitial) {
+
     }
 }

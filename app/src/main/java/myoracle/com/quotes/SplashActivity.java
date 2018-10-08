@@ -53,11 +53,11 @@ public class SplashActivity extends AppCompatActivity implements InMobiBanner.Ba
         InMobiBanner bannerAd = new InMobiBanner(this, 1539335970997L);
         RelativeLayout adContainer = findViewById(R.id.banner);
         float density = getResources().getDisplayMetrics().density;
-        RelativeLayout.LayoutParams bannerLp = new RelativeLayout.LayoutParams((int) (320 * density), (int) (50 * density));
+        RelativeLayout.LayoutParams bannerLp = new RelativeLayout.LayoutParams((int) (520 * density), (int) (50 * density));
         adContainer.addView(bannerAd, bannerLp);
         bannerAd.load();
         bannerAd.setListener(this);
-       // openActivity();
+        openActivity();
     }
 
 
@@ -79,7 +79,7 @@ public class SplashActivity extends AppCompatActivity implements InMobiBanner.Ba
 
     @Override
     public void onAdLoadFailed(InMobiBanner inMobiBanner, InMobiAdRequestStatus inMobiAdRequestStatus) {
-        Toast.makeText(getApplicationContext(),inMobiAdRequestStatus.getMessage(),Toast.LENGTH_LONG).show();
+       // Toast.makeText(getApplicationContext(),inMobiAdRequestStatus.getMessage(),Toast.LENGTH_LONG).show();
         Log.v("onAdLoadFailed:", "onAdLoadFailed: "+inMobiAdRequestStatus.getMessage());
     }
 

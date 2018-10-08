@@ -57,7 +57,12 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
-
+    <RelativeLayout
+        android:id="@+id/banner2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center" />
 
 
 </RelativeLayout>
